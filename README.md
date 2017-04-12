@@ -21,6 +21,6 @@ Notes
 Use `go run` to launch grafana-server
 
 ```
-cd /Volumes/120GB/tmp/cascade-dashboard-builder/src/github.com/grafana/grafana/pkg/cmd/grafana-server
-go run main.go server.go web.go -homepath /Volumes/120GB/tmp/cascade-dashboard-builder/src/github.com/grafana/grafana
+cd $GOPATH/src/github.com/grafana/grafana/pkg/cmd/grafana-server
+go run main.go server.go web.go -homepath $GOPATH/src/github.com/grafana/grafana
 ```
