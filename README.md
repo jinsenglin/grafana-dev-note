@@ -33,11 +33,16 @@ Use debugger to launch grafana-server
 cd $GOPATH/src/github.com/grafana/grafana/pkg/cmd/grafana-server
 dlv debug -- -homepath $GOPATH/src/github.com/grafana/grafana
 
+(dlv) break main.main
+(dlv) break main.main:1
+(dlv) break main.main:2
+(dlv) continue
+(dlv) continue
 (dlv) continue
 ```
 
 Have tried
 
-* delve
+* delve http://blog.ralch.com/tutorial/golang-debug-with-delve/
 * godebug
 * gdb
