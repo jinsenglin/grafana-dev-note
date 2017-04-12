@@ -15,3 +15,12 @@ Notes
 * both `-ldflags` and `-o` are flags of `build`
 * both `-w` and `-X` are flags of `-ldflags`
 * full list of `-ldflags` flags see here https://golang.org/cmd/link/
+
+---
+
+Use `go run` to launch grafana-server
+
+```
+cd /Volumes/120GB/tmp/cascade-dashboard-builder/src/github.com/grafana/grafana/pkg/cmd/grafana-server
+go run main.go server.go web.go -homepath /Volumes/120GB/tmp/cascade-dashboard-builder/src/github.com/grafana/grafana
+```
