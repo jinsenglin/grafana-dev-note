@@ -30,11 +30,14 @@ go run main.go server.go web.go -homepath $GOPATH/src/github.com/grafana/grafana
 Use debugger to launch grafana-server
 
 ```
-# TODO
+cd $GOPATH/src/github.com/grafana/grafana/pkg/cmd/grafana-server
+dlv debug -- -homepath $GOPATH/src/github.com/grafana/grafana
+
+(dlv) continue
 ```
 
 Have tried
 
 * delve
 * godebug
-
+* gdb
