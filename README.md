@@ -36,9 +36,21 @@ dlv debug -- -homepath $GOPATH/src/github.com/grafana/grafana
 (dlv) break main.main
 (dlv) break main.main:1
 (dlv) break main.main:2
+(dlv) break api.LoginPost:1
 (dlv) continue
 (dlv) continue
 (dlv) continue
+(dlv) continue
+
+# Try login from http://localhost:3000/login
+
+(dlv) continue
+```
+
+If panic
+
+````
+(dlv) restart
 ```
 
 Have tried
