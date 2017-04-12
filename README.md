@@ -49,7 +49,7 @@ dlv debug -- -homepath $GOPATH/src/github.com/grafana/grafana
 
 If panic
 
-````
+```
 (dlv) restart
 ```
 
