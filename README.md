@@ -24,3 +24,17 @@ Use `go run` to launch grafana-server
 cd $GOPATH/src/github.com/grafana/grafana/pkg/cmd/grafana-server
 go run main.go server.go web.go -homepath $GOPATH/src/github.com/grafana/grafana
 ```
+
+---
+
+Use debugger to launch grafana-server
+
+```
+# TODO
+```
+
+Have tried
+
+* delve
+* godebug
+
