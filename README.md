@@ -54,6 +54,10 @@ dlv debug -- -homepath $GOPATH/src/github.com/grafana/grafana
 
 # Try login from http://localhost:3000/login
 
+(dlv) args
+
+# Can see the input username and password
+
 (dlv) continue
 ```
 
