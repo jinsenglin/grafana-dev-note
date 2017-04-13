@@ -69,6 +69,21 @@ If panic
 * step : single step through program.
 * stepout : step out of the current function.
 
+(dlv) print-related commands
+
+* args : print function arguments.
+* breakpoints: print out info for active breakpoints.
+* funcs : print list of functions.
+* goroutines : print program goroutines.
+* help : prints the help message.
+* locals : print local variables.
+* regs : print contents of CPU registers.
+* sources : print list of source files.
+* stack : print stack trace.
+* threads : print out info for every traced thread.
+* types : print list of types
+* vars : print package variables.
+
 Have tried
 
 * delve
