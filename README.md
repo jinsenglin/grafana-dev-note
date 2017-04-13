@@ -41,9 +41,11 @@ Use delve
 cd $GOPATH/src/github.com/grafana/grafana/pkg/cmd/grafana-server
 dlv debug -- -homepath $GOPATH/src/github.com/grafana/grafana
 
+# grafana version 4.1.2
+
 (dlv) break main.main
 (dlv) break main.main:1
-(dlv) break main.main:2
+(dlv) break main.go:46
 (dlv) break api.LoginPost:1
 (dlv) continue
 (dlv) continue
