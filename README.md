@@ -78,4 +78,3 @@ Have tried
 References
 
 * https://github.com/derekparker/delve/tree/master/Documentation
-* http://blog.ralch.com/tutorial/golang-debug-with-delve/
