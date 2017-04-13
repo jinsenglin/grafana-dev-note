@@ -29,6 +29,14 @@ go run main.go server.go web.go -homepath $GOPATH/src/github.com/grafana/grafana
 
 Use debugger to launch grafana-server
 
+Install delve
+
+```
+brew install go-delve/delve/delve
+```
+
+Use delve
+
 ```
 cd $GOPATH/src/github.com/grafana/grafana/pkg/cmd/grafana-server
 dlv debug -- -homepath $GOPATH/src/github.com/grafana/grafana
@@ -53,8 +61,19 @@ If panic
 (dlv) restart
 ```
 
+(dlv) step-related commands
+
+* next : step over to next source line.
+* step : single step through program.
+* stepout : step out of the current function.
+
 Have tried
 
-* delve http://blog.ralch.com/tutorial/golang-debug-with-delve/
+* delve
 * godebug
 * gdb
+
+References
+
+* https://github.com/derekparker/delve/tree/master/Documentation
+* http://blog.ralch.com/tutorial/golang-debug-with-delve/
