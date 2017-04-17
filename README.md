@@ -266,6 +266,8 @@ $scope.contextSrv = contextSrv;
 In public/app/core/services/context_srv.ts
 
 ```
+import config from 'app/core/config';
+...
 export class User {
     ...
     orgRole: any;
