@@ -97,3 +97,56 @@ Have tried
 References
 
 * https://github.com/derekparker/delve/tree/master/Documentation
+
+---
+
+In pkg/middleware/middleware.go
+
+```
+func initContextWithBasicAuth(ctx *Context, orgId int64) bool {
+
+    if !setting.BasicAuthEnabled {
+        return false
+    }
+    ....
+}
+```
+
+In pkg/setting/setting.go
+
+```
+var (
+    ...
+    BasicAuthEnabled bool
+    ...
+)
+
+...
+
+func NewConfigContext(args *CommandLineArgs) error {
+
+    ...
+    authBasic := Cfg.Section("auth.basic")
+    BasicAuthEnabled = authBasic.Key("enabled").MustBool(true)
+    ...
+    
+}
+```
+
+In conf/defaults.ini
+
+```
+[auth.basic]
+enabled = true
+```
+
+setting.NewConfigContext in pkg/setting/setting.go
+
+main.initRuntime in pkg/cmd/grafana-server/main.go
+
+main.Start in pkg/cmd/grafana-server/server.go
+
+main.main in pkg/cmd/grafana-server/main.go 
+
+---
+
