@@ -105,11 +105,11 @@ References
 Result:
 
 ```
-# in custom.ini
+# in conf/custom.ini
 [ui.manage_dashboard]
 enabled = false
 
-# in setting.go
+# in pkg/setting/setting.go
 var (
     ...
     UIManageDashboard bool = true
@@ -177,7 +177,7 @@ main.main in pkg/cmd/grafana-server/main.go
 Result: 
 
 ```
-# in index.html
+# in public/views/index.html
 [[.UIManageDashboard]]
 
 # in pkg/api/index.go
@@ -271,13 +271,13 @@ type IndexViewData struct {
 Result:
 
 ```
-# in index.html
+# in public/views/index.html
 window.grafanaBootData = {
     ...
     uiManageDashboard: [[.UIManageDashboard]]
 };
 
-# in context_srv.ts
+# in public/app/core/services/context_srv.ts
 export class ContextSrv {
     ...
     uiManageDashboard: any;
@@ -287,7 +287,7 @@ export class ContextSrv {
         this.uiManageDashboard = config.bootData.uiManageDashboard;
     }
 
-# in dashnav.ts
+# in public/app/features/dashboard/dashnav/dashnav.ts
 $scope.contextSrv.uiManageDashboard
 ```
 
