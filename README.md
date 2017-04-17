@@ -140,13 +140,73 @@ In conf/defaults.ini
 enabled = true
 ```
 
-setting.NewConfigContext in pkg/setting/setting.go
+Initialization
 
-main.initRuntime in pkg/cmd/grafana-server/main.go
-
-main.Start in pkg/cmd/grafana-server/server.go
-
+```
 main.main in pkg/cmd/grafana-server/main.go 
+-> setting.NewConfigContext in pkg/setting/setting.go
+  -> main.Start in pkg/cmd/grafana-server/server.go
+    -> main.initRuntime in pkg/cmd/grafana-server/main.go
+
+```
 
 ---
+
+In public/views/index.html
+
+```
+[[if .User.LightTheme]]
+...
+[[end]] 
+
+...
+
+<a href="http://grafana.org/download" target="_blank" bs-tooltip="'[[.NewGrafanaVersion]]'">
+```
+
+In pkg/api/index.go
+
+```
+func setIndexViewData(c *middleware.Context) (*dtos.IndexViewData, error) {
+    settings, err := getFrontendSettingsMap(c)
+    ...
+    appUrl := setting.AppUrl
+    ...
+    var data = dtos.IndexViewData{
+        User: &dtos.CurrentUser{
+            ...
+            LightTheme:     prefs.Theme == "light",
+            ...
+        },
+        ...
+        NewGrafanaVersion:       plugins.GrafanaLatestVersion,
+        ...
+    }
+    ...
+    return &data, nil
+}
+```
+
+In pkg/api/frontendsettings.go
+
+```
+func getFrontendSettingsMap(c *middleware.Context) (map[string]interface{}, error) {
+    ...
+    jsonObj := map[string]interface{}{
+        ...
+    }
+
+    return jsonObj, nil
+}
+```
+
+In pkg/setting/setting.go
+
+```
+var (
+    ...
+    AppUrl       string
+    ...
+)
+```
 
