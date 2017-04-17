@@ -102,6 +102,24 @@ References
 
 # Goal: add new configuration section and key in custom.ini
 
+Result:
+
+```
+# in custom.ini
+[ui.manage_dashboard]
+enabled = false
+
+# in setting.go
+var (
+    ...
+    UIManageDashboard bool = true
+    ...
+)
+
+uiManageDashboard := Cfg.Section("ui.manage_dashboard")
+UIManageDashboard = uiManageDashboard.Key("enabled").MustBool(true)
+```
+
 In pkg/middleware/middleware.go
 
 ```
@@ -156,6 +174,25 @@ main.main in pkg/cmd/grafana-server/main.go
 
 # Goal: use the new key in index.html
 
+Result: 
+
+```
+# in index.html
+[[.UIManageDashboard]]
+
+# in pkg/api/index.go
+var data = dtos.IndexViewData{
+    ...
+    UIManageDashboard:   setting.UIManageDashboard,
+}
+
+# in pkg/api/dtos/index.go
+type IndexViewData struct {
+    ...
+    UIManageDashboard   bool
+}
+```
+
 In public/views/index.html
 
 ```
@@ -182,6 +219,7 @@ func setIndexViewData(c *middleware.Context) (*dtos.IndexViewData, error) {
             LightTheme:     prefs.Theme == "light",
             ...
         },
+        Settings:                settings,
         ...
         NewGrafanaVersion:       plugins.GrafanaLatestVersion,
         ...
@@ -229,6 +267,29 @@ type IndexViewData struct {
 ---
 
 # Goal: use the new key in dashnav.html
+
+Result:
+
+```
+# in index.html
+window.grafanaBootData = {
+    ...
+    uiManageDashboard: [[.UIManageDashboard]]
+};
+
+# in context_srv.ts
+export class ContextSrv {
+    ...
+    uiManageDashboard: any;
+    
+    constructor() {
+        ...
+        this.uiManageDashboard = config.bootData.uiManageDashboard;
+    }
+
+# in dashnav.ts
+$scope.contextSrv.uiManageDashboard
+```
 
 In public/app/features/dashboard/dashnav/dashnav.html
 
