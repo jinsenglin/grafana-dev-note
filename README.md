@@ -210,3 +210,14 @@ var (
 )
 ```
 
+In pkg/api/dtos/index.go
+
+```
+package dtos                                                                                                           
+                                                                                                                       
+type IndexViewData struct {
+        User                    *CurrentUser
+        ...
+        NewGrafanaVersion       string                                                                                
+}
+```
