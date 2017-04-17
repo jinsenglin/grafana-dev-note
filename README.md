@@ -100,6 +100,8 @@ References
 
 ---
 
+# Goal: add new configuration section and key in custom.ini
+
 In pkg/middleware/middleware.go
 
 ```
@@ -151,6 +153,8 @@ main.main in pkg/cmd/grafana-server/main.go
 ```
 
 ---
+
+# Goal: use the new key in index.html
 
 In public/views/index.html
 
@@ -220,4 +224,110 @@ type IndexViewData struct {
         ...
         NewGrafanaVersion       string                                                                                
 }
+```
+
+---
+
+# Goal: use the new key in dashnav.html
+
+In public/app/features/dashboard/dashnav/dashnav.html
+
+```
+<li ng-if="::showSettingsMenu" class="dropdown">
+```
+
+In public/app/features/dashboard/dashnav/dashnav.ts
+
+```
+export class DashNavCtrl {
+
+    /** @ngInject */
+    constructor($scope, $rootScope, dashboardSrv, $location, playlistSrv, backendSrv, $timeout, datasourceSrv) {
+        
+        $scope.init = function() {
+            $scope.showSettingsMenu = $scope.dashboardMeta.canEdit || $scope.contextSrv.isEditor;
+            ...
+    
+}
+```
+
+In public/app/features/dashboard/dashboard_ctrl.ts
+
+```
+$scope.dashboardMeta = dashboard.meta;
+```
+
+In public/app/core/components/grafana_app.ts
+
+```
+$scope.contextSrv = contextSrv;
+```
+
+In public/app/core/services/context_srv.ts
+
+```
+export class User {
+    ...
+    orgRole: any;
+    ...
+    
+    constructor() {
+        if (config.bootData.user) {
+            _.extend(this, config.bootData.user);
+        }
+    }
+}
+
+export class ContextSrv {
+    ...
+    user: User;
+    ...
+    isEditor: any;
+    ...
+    
+    constructor() {
+        ...
+        this.user = new User();
+        ...
+        this.isEditor = this.hasRole('Editor') || this.hasRole('Admin');
+    }
+    
+    hasRole(role) {
+        return this.user.orgRole === role;
+    }
+}
+
+...
+
+var contextSrv = new ContextSrv();
+```
+
+In public/app/core/config.js
+
+```
+define([
+  'app/core/settings',
+],
+function (Settings) {
+  "use strict";
+
+  var bootData = window.grafanaBootData || { settings: {} };
+  var options = bootData.settings;
+  options.bootData = bootData;
+
+  return new Settings(options);
+
+});
+```
+
+In public/views/index.html
+
+```
+<script>
+    window.grafanaBootData = {
+        user:[[.User]],
+        settings: [[.Settings]],
+        mainNavLinks: [[.MainNavLinks]]
+    };
+</script>
 ```
