@@ -97,3 +97,17 @@ Have tried
 References
 
 * https://github.com/derekparker/delve/tree/master/Documentation
+
+---
+
+# Goal: add custom data HTTP API
+
+Files
+
+* M pkg/api/api.go
+* A pkg/api/custom_data.go
+* A pkg/api/dtos/custom_data.go
+* A pkg/models/custom_data.go
+* A pkg/services/sqlstore/custom_data.go
+* M pkg/services/sqlstore/migrations/migrations.go
+* A pkg/services/sqlstore/migrations/custom_data_mig.go
